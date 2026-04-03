@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Opera Obscene</title>
 
-  <!-- Google Analytics — replace G-XXXXXXXXXX with your Measurement ID -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R3X6LM11SC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -53,70 +52,87 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2.5rem 1.25rem 4rem;
+      padding: 0 0 4rem;
     }
 
-
-
-    /* Banner */
+    /* ── Banner ──────────────────────────────────────────
+       Always full viewport width, never has side padding.
+       Fixed height on desktop, shorter on mobile.
+    ───────────────────────────────────────────────────── */
     .banner {
       width: 100%;
-      max-width: 900px;
-      height: 180px;
-      border-radius: 0 0 12px 12px;
+      height: 200px;
       background: #c8c8d0;
       overflow: hidden;
       position: relative;
-      animation: fadeUp 0.5s ease both;
+      flex-shrink: 0;
     }
 
-    .banner img { width: 100%; height: 100%; object-fit: cover; }
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
 
-    /* to fix */
+    /* Avatar sits on the bottom-left of the banner, half hanging out */
     .avatar-wrap {
-      width: 90px;
-      height: 90px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid #fff;
+      border: 4px solid #fff;
       box-shadow: 0 2px 12px rgba(0,0,0,0.15);
       background: #ddd;
       display: flex;
       align-items: center;
       justify-content: center;
       position: absolute;
-      bottom: -30px;
+      bottom: -20px;
       left: 2rem;
+      z-index: 2;
     }
 
     .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .avatar-placeholder { font-size: 2.2rem; user-select: none; }
+    .avatar-placeholder { font-size: 2.4rem; user-select: none; }
 
-    /* Main two-column layout: to fix so it is animated like era of meats. Make it fuse earlier and match when they do. Fix style here, animation further down?  */
+    /* Thin white strip the avatar overlaps onto, connecting banner to body */
+    .banner-foot {
+      width: 100%;
+      background: var(--card);
+      height: 30px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    /* ── Main layout ─────────────────────────────────────
+       Centred, max 1000px, side padding on desktop.
+       On mobile: no side padding, full width children.
+    ───────────────────────────────────────────────────── */
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       display: flex;
       align-items: flex-start;
       gap: 1.25rem;
-      padding-top: 1.25rem;
+      padding: 1.5rem 1.5rem 0;
+      animation: fadeUp 0.5s 0.1s ease both;
     }
 
-    /* Left info card */
+    /* ── Left info card ─────────────────────────────── */
     .info-card {
-      width: 220px;
+      width: 240px;
       flex-shrink: 0;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
       padding: 1.25rem;
-      margin-top: 1.5rem;
-      animation: fadeUp 0.5s 0.1s ease both;
+      animation: fadeUp 0.5s 0.15s ease both;
     }
 
     .name {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--ink);
       margin-bottom: 0.2rem;
@@ -134,26 +150,19 @@
       line-height: 1.6;
     }
 
-    /* Right links column */
+    /* ── Right links column ─────────────────────────── */
     .links-col {
       flex: 1;
       min-width: 0;
-      margin-top: 0.25rem;
+      animation: fadeUp 0.5s 0.2s ease both;
     }
 
-    /* Maybe fix the banner here actually */
-    @media (max-width: 600px) {
-      .banner { height: 120px; border-radius: 0; }
-      .container { flex-direction: column; padding-top: 2.5rem; }
-      .info-card { width: 100%; margin-top: 0; }
-    }
-
-    /* Link buttons: they need to be bigger, see eraofmeat */
+    /* ── Link buttons ───────────────────────────────── */
     .links {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
 
     .link-btn {
@@ -161,7 +170,7 @@
       align-items: center;
       gap: 1rem;
       width: 100%;
-      padding: 0.85rem 1.1rem;
+      padding: 1rem 1.25rem;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -179,11 +188,14 @@
       transform: translateY(-1px);
     }
 
-    .link-btn:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .link-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
 
     .link-icon {
-      width: 42px;
-      height: 42px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -192,7 +204,7 @@
       overflow: hidden;
     }
 
-    .icon-svg { width: 42px; height: 42px; }
+    .icon-svg { width: 48px; height: 48px; }
 
     .link-text {
       display: flex;
@@ -202,13 +214,13 @@
     }
 
     .link-label {
-      font-size: 0.97rem;
+      font-size: 1rem;
       font-weight: 500;
       color: var(--ink);
     }
 
     .link-sub {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--accent);
       margin-top: 0.05rem;
       white-space: nowrap;
@@ -216,13 +228,13 @@
       text-overflow: ellipsis;
     }
 
-    /* Stagger */
-    .link-btn:nth-child(1) { animation-delay: 0.2s; }
-    .link-btn:nth-child(2) { animation-delay: 0.3s; }
-    .link-btn:nth-child(3) { animation-delay: 0.4s; }
-    .link-btn:nth-child(4) { animation-delay: 0.5s; }
-    .link-btn:nth-child(5) { animation-delay: 0.6s; }
-    .link-btn:nth-child(6) { animation-delay: 0.44s; }
+    /* Stagger — evenly spaced, continuing the cascade */
+    .link-btn:nth-child(1) { animation-delay: 0.20s; }
+    .link-btn:nth-child(2) { animation-delay: 0.27s; }
+    .link-btn:nth-child(3) { animation-delay: 0.34s; }
+    .link-btn:nth-child(4) { animation-delay: 0.41s; }
+    .link-btn:nth-child(5) { animation-delay: 0.48s; }
+    .link-btn:nth-child(6) { animation-delay: 0.55s; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
@@ -233,20 +245,63 @@
       margin-top: 2.5rem;
       font-size: 0.72rem;
       color: #bbb;
-      animation: fadeUp 0.5s 0.7s ease both;
+      animation: fadeUp 0.5s 0.6s ease both;
+    }
+
+    /* ── Responsive ──────────────────────────────────────
+       Below 640px:
+       - Banner stays full width (already is), gets shorter
+       - Container loses side padding so content is edge-to-edge
+       - Layout flips to column: info card on top, links below
+       - Both stretch to full width
+    ───────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .banner { height: 140px; }
+
+      .avatar-wrap {
+        width: 80px;
+        height: 80px;
+        left: 1rem;
+        bottom: -18px;
+      }
+
+      .banner-foot { height: 28px; }
+
+      .container {
+        flex-direction: column;
+        padding: 1rem 0.75rem 0;
+        gap: 0.75rem;
+      }
+
+      .info-card {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      .links-col {
+        width: 100%;
+      }
+
+      .link-btn {
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Banner image: set src to your header/banner image URL, or leave as plain grey -->
+  <!-- Banner: uncomment <img> and set src when you have a banner image -->
   <div class="banner">
-    <!-- <img src="your-banner.jpg" alt="" /> -->
+    <!-- <img src="banner.jpg" alt="" /> -->
     <div class="avatar-wrap">
-      <!-- <img src="your-photo.jpg" alt="Opera Obscene" /> -->
+      <!-- <img src="avatar.jpg" alt="Opera Obscene" /> -->
       <span class="avatar-placeholder">🎭</span>
     </div>
   </div>
+
+  <!-- White strip the avatar sits on top of -->
+  <div class="banner-foot"></div>
 
   <div class="container">
 
@@ -261,11 +316,12 @@
     <div class="links-col">
       <nav class="links">
 
+        <!-- OnlyFans -->
         <a class="link-btn" href="#" onclick="return trackLink('OnlyFans', 'https://onlyfans.com/operaobscene')">
           <span class="link-icon">
-            <svg class="icon-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="21" cy="21" r="21" fill="#ff0069"/>
-              <path fill="#fff" transform="translate(9,9)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#00AFF0"/>
+              <text x="24" y="31" text-anchor="middle" font-size="17" font-weight="bold" font-family="Arial, sans-serif" fill="#fff">OF</text>
             </svg>
           </span>
           <span class="link-text">
@@ -274,11 +330,14 @@
           </span>
         </a>
 
+        <!-- Patreon -->
         <a class="link-btn" href="#" onclick="return trackLink('Patreon', 'https://patreon.com/operaobscene')">
           <span class="link-icon">
-            <svg class="icon-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="21" cy="21" r="21" fill="#ff424d"/>
-              <path fill="#fff" transform="translate(9,9)" d="M0 0h24v24H0V0zm5 5h7v7H5V5zm0 9h7v7H5v-7z"/>
+            <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#FF424D"/>
+              <!-- Patreon "P" shape: circle + rectangle -->
+              <circle cx="28" cy="20" r="8" fill="#fff"/>
+              <rect x="11" y="12" width="5.5" height="24" rx="1" fill="#fff"/>
             </svg>
           </span>
           <span class="link-text">
@@ -287,11 +346,12 @@
           </span>
         </a>
 
+        <!-- Twitter / X -->
         <a class="link-btn" href="#" onclick="return trackLink('Twitter/X', 'https://x.com/operaobscene')">
           <span class="link-icon">
-            <svg class="icon-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="21" cy="21" r="21" fill="#000"/>
-              <path fill="#fff" transform="translate(9,9)" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+            <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#000"/>
+              <path fill="#fff" transform="translate(11,11)" d="M20.557 1.153h4.02l-8.78 10.037L26 24.846h-8.092l-6.337-8.284-7.253 8.284H.518l9.39-10.73L0 1.154h8.3l5.726 7.573ZM19.24 22.644h2.228L7.084 3.24H4.698Z"/>
             </svg>
           </span>
           <span class="link-text">
@@ -300,9 +360,10 @@
           </span>
         </a>
 
+        <!-- Instagram -->
         <a class="link-btn" href="#" onclick="return trackLink('Instagram', 'https://instagram.com/operaobscene')">
           <span class="link-icon">
-            <svg class="icon-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+            <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <radialGradient id="ig" cx="30%" cy="107%" r="150%">
                   <stop offset="0%" stop-color="#fdf497"/>
@@ -312,8 +373,8 @@
                   <stop offset="90%" stop-color="#285AEB"/>
                 </radialGradient>
               </defs>
-              <circle cx="21" cy="21" r="21" fill="url(#ig)"/>
-              <path fill="#fff" transform="translate(9,9)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              <circle cx="24" cy="24" r="24" fill="url(#ig)"/>
+              <path fill="#fff" transform="translate(12,12)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
             </svg>
           </span>
           <span class="link-text">
@@ -322,11 +383,12 @@
           </span>
         </a>
 
+        <!-- Email -->
         <a class="link-btn" href="#" onclick="return trackLink('Email', 'mailto:operaobscene@example.com')">
           <span class="link-icon">
-            <svg class="icon-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="21" cy="21" r="21" fill="#6055c7"/>
-              <path fill="#fff" transform="translate(9,9)" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#6055c7"/>
+              <path fill="#fff" transform="translate(11,11)" d="M22 4H4c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4.5-9 5.625L4 8.5V6l9 5.625L22 6v2.5z"/>
             </svg>
           </span>
           <span class="link-text">
