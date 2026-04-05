@@ -28,20 +28,22 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
+    * {
+       -webkit-tap-highlight-color: transparent;
+      }
     :root {
-      --bg: #ebebeb;
-      --card: #ffffff;
-      --card-hover: #f7f7f7;
-      --border: #e0e0e0;
-      --ink: #1a1a1a;
-      --muted: #666;
-      --accent: #6055c7;
+       --bg: radial-gradient(circle at top, #fbeff5, #eadbe2);
+       --card: #ffffff;
+       --card-hover: #fff5f8;
+       --border: #f0dbe4;
+       --ink: #2a1f26;
+       --muted: #8a6f78;
+       --accent: #e88ab3;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      min-height: 100%;
       background: var(--bg);
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
@@ -55,9 +57,22 @@
       padding: 0 0 4rem;
     }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    transparent 65%,
+    rgba(232, 138, 179, 0.10) 100%
+  );
+  z-index: 1;
+}
+
     .banner {
       width: 100%;
-      height: 200px;
+      height: clamp(140px, 22vw, 220px);
       background: #c8c8d0;
       overflow: hidden;
       position: relative;
@@ -167,27 +182,28 @@
       gap: 1rem;
       width: 100%;
       max-width: 600px;
-      padding: 1rem 1.25rem;
-      background: var(--card);
+      padding: 1.15rem 1.25rem;
+      background: linear-gradient(180deg, #ffffff, #fff7fa);
       border: 1px solid var(--border);
       border-radius: 12px;
       text-decoration: none;
       color: var(--ink);
       cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 4px 14px rgba(232, 138, 179, 0.12);
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
       animation: fadeUp 0.5s ease both;
     }
 
     .link-btn:hover {
-      background: var(--card-hover);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      background:  linear-gradient(180deg, #ffffff, #ffeef5);
+      box-shadow: 0 8px 24px rgba(232, 138, 179, 0.2);
       transform: translateY(-1px);
     }
 
     .link-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transform: scale(0.98);
+      transition: transform 0.05s ease;
+      filter: brightness(0.97);
     }
 
     .link-icon {
@@ -234,7 +250,7 @@
     .link-btn:nth-child(6) { animation-delay: 0.55s; }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -253,7 +269,7 @@
        - Both stretch to full width
     ───────────────────────────────────────────────────── */
     @media (max-width: 1000px) {
-      .banner { height: 140px; }
+    
 
       .avatar-wrap {
         width: 80px;
@@ -288,11 +304,23 @@
         padding: 0.9rem 1rem;
       
       }
+
+      @keyframes breathe {
+       0% { transform: scale(1); }
+       15% { transform: scale(1)}
+       67% { transform: scale(1.010); }
+        100% { transform: scale(1); }
+      }
+
+      .primary {
+         animation: breathe 2.6s cubic-bezier(0.4, 0.1, 0.2, 1) infinite;
+         animation-direction: alternate;
+        }
+
     }
   </style>
 </head>
 <body>
-
   <!-- Banner: uncomment <img> and set src when you have a banner image -->
   <div class="banner">
     <!-- <img src="banner.jpg" alt="" /> -->
@@ -311,7 +339,7 @@
     <div class="info-card">
       <h1 class="name">Opera Obscene</h1>
       <p class="handle">@operaobscene</p>
-      <p class="bio">Welcome to my adult content creation hub. Discover exclusive content and connect with me across platforms. All links lead to my premium experiences on OnlyFans and Patreon.</p>
+      <p class="bio">That's it! You've found me. I'm happy to see you!</p>
     </div>
 
     <!-- Right links column -->
@@ -319,7 +347,7 @@
       <nav class="links">
 
         <!-- OnlyFans -->
-        <a class="link-btn" href="#" onclick="return trackLink('OnlyFans', 'https://onlyfans.com/operaobscene')">
+        <a class="link-btn primary" href="#" onclick="return trackLink('Onlyfans', 'https://onlyfans.com/operaobscene')">
           <span class="link-icon">
             <svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
               <circle cx="24" cy="24" r="24" fill="#00AFF0"/>
@@ -327,7 +355,7 @@
             </svg>
           </span>
           <span class="link-text">
-            <span class="link-label">OnlyFans</span>
+            <span class="link-label">💖 talk to me</span>
             <span class="link-sub">onlyfans.com/operaobscene</span>
           </span>
         </a>
@@ -343,7 +371,7 @@
             </svg>
           </span>
           <span class="link-text">
-            <span class="link-label">Patreon</span>
+            <span class="link-label">Find my dirty art there...</span>
             <span class="link-sub">patreon.com/operaobscene</span>
           </span>
         </a>
